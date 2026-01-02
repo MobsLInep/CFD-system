@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced 3D CFD Streamline Visualization System</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+<body>
+    <canvas id="webgl-canvas"></canvas>
+    
+    <div id="loading-overlay">
+        <div class="loader"></div>
+        <div id="loading-text">Initializing System...</div>
+    </div>
+
+    <div id="control-panel">
+        <div class="panel-header">
+            <h2>CFD Controls</h2>
+            <button id="toggle-panel">▼</button>
+        </div>
+        <div class="panel-content">
+            <!-- Geometry Section -->
+            <div class="control-section">
+                <h3>Geometry</h3>
+                <div class="control-group"> 
+                    <label for="obj-file-input">📁 Load OBJ File:</label> 
+                    <input type="file" id="obj-file-input" accept=".obj" /> 
+                </div>
+                <div class="control-group">
+                    <label><input type="checkbox" id="toggle-wireframe"> Wireframe</label>
+                    <label><input type="checkbox" id="toggle-visibility" checked> Show Object</label>
+                </div>
+            </div>
+
+            <!-- Air Generation Section -->
+            <div class="control-section">
+                <h3>Air Generation</h3>
+                <div class="control-group">
+                    <label>Position</label>
+                    <div class="xyz-input">
+                        <input type="number" id="source-x" step="0.1" value="-1.0"> X
+                        <input type="number" id="source-y" step="0.1" value="0.0"> Y
+                        <input type="number" id="source-z" step="0.1" value="0.0"> Z
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label>Emission Rate</label>
+                    <input type="range" id="emission-rate" min="10" max="5000" value="500">
+                    <span id="emission-rate-val">500</span>
+                </div>
+            </div>
+
+            <!-- Velocity Field Section -->
+            <div class="control-section">
+                <h3>Velocity Field</h3>
+                <div class="control-group">
+                    <label>Method</label>
+                    <select id="flow-method">
+                        <option value="potential">Potential Flow</option>
+                        <option value="radial">Radial Outflow</option>
+                        <option value="jet">Directional Jet</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label>Grid Resolution</label>
+                    <select id="grid-resolution">
+                        <option value="32">32x32x32</option>
+                        <option value="64" selected>64x64x64</option>
+                        <option value="96">96x96x96</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Particle System Section -->
+            <div class="control-section">
+                <h3>Particles</h3>
+                <div class="control-group">
+                    <label>Lifespan</label>
+                    <input type="range" id="particle-lifespan" min="100" max="2000" value="300">
+                    <span id="particle-lifespan-val">300</span>
+                </div>
+                <div class="control-group">
+                    <label>Speed Multiplier</label>
+                    <input type="range" id="speed-multiplier" min="0.1" max="3.0" step="0.1" value="1.0">
+                    <span id="speed-multiplier-val">1.0</span>
+                </div>
+            </div>
+
+            <!-- Performance Section -->
+            <div class="control-section">
+                <h3>Performance</h3>
+                <div class="stat-row">FPS: <span id="fps-counter">0</span></div>
+                <div class="stat-row">Particles: <span id="particle-count">0</span></div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="src/main.js"></script>
+</body>
+</html>

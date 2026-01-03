@@ -141,6 +141,36 @@ class App {
         
         // Initial update
         updateParticles();
+
+        // Streamline Emitter Controls 
+        const emitterControls = () => { 
+            const posX = parseFloat(document.getElementById('emitter-pos-x')?.value || -2.0); 
+            const posY = parseFloat(document.getElementById('emitter-pos-y')?.value || 0.0); 
+            const posZ = parseFloat(document.getElementById('emitter-pos-z')?.value || 0.0); 
+            const width = parseFloat(document.getElementById('emitter-width')?.value || 1.5); 
+            const height = parseFloat(document.getElementById('emitter-height')?.value || 1.5); 
+
+            this.particleSystem.updateParams({ 
+                emitterPos: new THREE.Vector3(posX, posY, posZ), 
+                emitterWidth: width, 
+                emitterHeight: height 
+            }); 
+            
+            // Update display values
+            if(document.getElementById('emitter-pos-x-val')) document.getElementById('emitter-pos-x-val').textContent = posX.toFixed(1);
+            if(document.getElementById('emitter-pos-y-val')) document.getElementById('emitter-pos-y-val').textContent = posY.toFixed(1);
+            if(document.getElementById('emitter-pos-z-val')) document.getElementById('emitter-pos-z-val').textContent = posZ.toFixed(1);
+            if(document.getElementById('emitter-width-val')) document.getElementById('emitter-width-val').textContent = width.toFixed(1);
+            if(document.getElementById('emitter-height-val')) document.getElementById('emitter-height-val').textContent = height.toFixed(1);
+        }; 
+
+        // Listeners for emitter controls 
+        ['emitter-pos-x', 'emitter-pos-y', 'emitter-pos-z', 'emitter-width', 'emitter-height'].forEach(id => { 
+            document.getElementById(id)?.addEventListener('input', emitterControls); 
+        }); 
+
+        // Initial emitter update 
+        emitterControls(); 
     }
 
     animate(time) {

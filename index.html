@@ -43,15 +43,26 @@
 
             <!-- Air Generation Section -->
             <div class="control-section">
-                <h3>Air Generation</h3>
-                <div class="control-group">
-                    <label>Position</label>
-                    <div class="xyz-input">
-                        <input type="number" id="source-x" step="0.1" value="-1.0"> X
-                        <input type="number" id="source-y" step="0.1" value="0.0"> Y
-                        <input type="number" id="source-z" step="0.1" value="0.0"> Z
-                    </div>
-                </div>
+                <!-- Streamline Emitter Settings --> 
+                <div class="control-group"> 
+                    <h3>🌬️ Streamline Emitter</h3> 
+                    
+                    <label>Position X: <span id="emitter-pos-x-val">-2.0</span></label> 
+                    <input type="range" id="emitter-pos-x" min="-5" max="2" step="0.1" value="-2.0" /> 
+                    
+                    <label>Position Y: <span id="emitter-pos-y-val">0.0</span></label> 
+                    <input type="range" id="emitter-pos-y" min="-3" max="3" step="0.1" value="0.0" /> 
+                    
+                    <label>Position Z: <span id="emitter-pos-z-val">0.0</span></label> 
+                    <input type="range" id="emitter-pos-z" min="-3" max="3" step="0.1" value="0.0" /> 
+                    
+                    <label>Plane Width: <span id="emitter-width-val">1.5</span></label> 
+                    <input type="range" id="emitter-width" min="0.5" max="5" step="0.1" value="1.5" /> 
+                    
+                    <label>Plane Height: <span id="emitter-height-val">1.5</span></label> 
+                    <input type="range" id="emitter-height" min="0.5" max="5" step="0.1" value="1.5" /> 
+                </div> 
+
                 <div class="control-group">
                     <label>Emission Rate</label>
                     <input type="range" id="emission-rate" min="10" max="5000" value="500">
@@ -61,27 +72,37 @@
 
             <!-- Velocity Field Section -->
             <div class="control-section">
-                <h3>Velocity Field</h3>
-                <div class="control-group">
-                    <label>Method</label>
-                    <select id="flow-method">
-                        <option value="potential">Potential Flow</option>
-                        <option value="radial">Radial Outflow</option>
-                        <option value="jet">Directional Jet</option>
-                    </select>
-                </div>
-                <div class="control-group">
-                    <label>Grid Resolution</label>
-                    <select id="grid-resolution">
-                        <option value="32">32x32x32</option>
-                        <option value="64" selected>64x64x64</option>
-                        <option value="96">96x96x96</option>
-                    </select>
-                </div>
+                <!-- Streamline Flow Settings --> 
+                <div class="control-group"> 
+                    <h3>💨 Flow Settings</h3> 
+                    
+                    <label>Speed Multiplier: <span id="speed-mult-val">2.0</span></label> 
+                    <input type="range" id="speed-multiplier" min="0.5" max="5" step="0.1" value="2.0" /> 
+                    
+                    <label>Lifespan (frames): <span id="lifespan-val">500</span></label> 
+                    <input type="range" id="particle-lifespan" min="100" max="1000" step="50" value="500" /> 
+                </div> 
+
+                <!-- Flow Field Method --> 
+                <div class="control-group"> 
+                    <label for="flow-method">Flow Method:</label> 
+                    <select id="flow-method"> 
+                        <option value="potential">Potential Flow (Uniform + Source)</option> 
+                        <option value="radial">Radial/Vortex Flow</option> 
+                    </select> 
+                    
+                    <label for="grid-resolution">Grid Resolution:</label> 
+                    <select id="grid-resolution"> 
+                        <option value="32">32x32x32</option> 
+                        <option value="64" selected>64x64x64</option> 
+                        <option value="128">128x128x128</option> 
+                    </select> 
+                </div> 
             </div>
 
-            <!-- Particle System Section -->
-            <div class="control-section">
+            <!-- Particle System Section (Hidden as merged above) -->
+            <!-- <div class="control-section"> -->
+
                 <h3>Particles</h3>
                 <div class="control-group">
                     <label>Lifespan</label>
